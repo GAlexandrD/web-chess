@@ -1,0 +1,65 @@
+.field {
+  display: flex;
+  flex-direction: column-reverse;
+  margin: 0 auto;
+  width: 640px;
+  border: 20px solid #946c3e;
+}
+
+.chooseFigure {
+  display: none;
+  position: absolute;
+  left: calc(50% - 200px);
+  top: calc(50% - 50px);
+  z-index: 100;
+  justify-content: space-between;
+  align-items: center;
+  border: #946c3e 10px solid;
+  background: #ebc99d;
+}
+
+.choose {
+  width: 100px;
+  height: 100px;
+  padding: 30px;
+}
+
+.row {
+  display: flex;
+}
+
+.black {
+  position: relative;
+  box-sizing: border-box;
+  background: #946c3e;
+  width: 80px;
+  height: 80px;
+}
+
+.white {
+  position: relative;
+  box-sizing: border-box;
+  background: #ebc99d;
+  width: 80px;
+  height: 80px;
+}
+
+.figure {
+  display: block;
+  width: 66px;
+  height: 66px;
+  position: absolute;
+  top: 7px;
+  left: 7px;
+}
+
+.highlight {
+  border: 3px green solid;
+}
+
+.choose {
+  width: 70px;
+  height: 70px;
+  top: 5px;
+  left: 5px;
+}
