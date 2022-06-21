@@ -3,8 +3,8 @@
 import Figure from './Figure.js';
 
 class Bishop extends Figure {
-  constructor(board, cell, color) {
-    super(board, cell, color);
+  constructor(color) {
+    super(color);
     if (color === 'white') this.domFigure.src = 'img/white/bishop-xxl.png';
     if (color === 'black') this.domFigure.src = 'img/black/bishop-xl.png';
   }

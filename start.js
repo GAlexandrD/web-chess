@@ -13,25 +13,25 @@ const startChess = () => {
   const board = new Board(8, 8);
   const game = new Game(board);
   for (let i = 1; i <= 8; i++) {
-    new Pawn(board, { x: i, y: 2 }, 'white');
-    new Pawn(board, { x: i, y: 7 }, 'black');
+    board.addFigure(new Pawn('white'), { x: i, y: 2 });
+    board.addFigure(new Pawn('black'), { x: i, y: 7 });
   }
-  new King(board, { x: 5, y: 1 }, 'white');
-  new King(board, { x: 5, y: 8 }, 'black');
-  new Queen(board, { x: 4, y: 1 }, 'white');
-  new Queen(board, { x: 4, y: 8 }, 'black');
-  new Bishop(board, { x: 6, y: 8 }, 'black');
-  new Bishop(board, { x: 3, y: 8 }, 'black');
-  new Bishop(board, { x: 6, y: 1 }, 'white');
-  new Bishop(board, { x: 3, y: 1 }, 'white');
-  new Knight(board, { x: 7, y: 8 }, 'black');
-  new Knight(board, { x: 2, y: 8 }, 'black');
-  new Knight(board, { x: 7, y: 1 }, 'white');
-  new Knight(board, { x: 2, y: 1 }, 'white');
-  new Rook(board, { x: 8, y: 8 }, 'black');
-  new Rook(board, { x: 1, y: 8 }, 'black');
-  new Rook(board, { x: 8, y: 1 }, 'white');
-  new Rook(board, { x: 1, y: 1 }, 'white');
+  board.addFigure(new King('white'), { x: 5, y: 1 });
+  board.addFigure(new King('black'), { x: 5, y: 8 });
+  board.addFigure(new Queen('white'), { x: 4, y: 1 });
+  board.addFigure(new Queen('black'), { x: 4, y: 8 });
+  board.addFigure(new Bishop('black'), { x: 6, y: 8 });
+  board.addFigure(new Bishop('black'), { x: 3, y: 8 });
+  board.addFigure(new Bishop('white'), { x: 6, y: 1 });
+  board.addFigure(new Bishop('white'), { x: 3, y: 1 });
+  board.addFigure(new Knight('black'), { x: 7, y: 8 });
+  board.addFigure(new Knight('black'), { x: 2, y: 8 });
+  board.addFigure(new Knight('white'), { x: 7, y: 1 });
+  board.addFigure(new Knight('white'), { x: 2, y: 1 });
+  board.addFigure(new Rook('black'), { x: 8, y: 8 });
+  board.addFigure(new Rook('black'), { x: 1, y: 8 });
+  board.addFigure(new Rook('white'), { x: 8, y: 1 });
+  board.addFigure(new Rook('white'), { x: 1, y: 1 });
   game.start();
 };
 

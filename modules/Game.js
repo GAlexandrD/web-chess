@@ -12,7 +12,7 @@ class Game {
   }
 
   start() {
-    this.board.DOMBoard.addEventListener('click', this.chooseFigureEvent);
+    this.board.domBoard.addEventListener('click', this.chooseFigureEvent);
   }
 
   switchMovingSide() {
@@ -28,7 +28,7 @@ class Game {
     if (this.choosenFigure) this.noHighlight();
     this.highlight(figure);
     this.choosenFigure = figure;
-    this.board.DOMBoard.addEventListener('click', this.moveFigureEvent);
+    this.board.domBoard.addEventListener('click', this.moveFigureEvent);
   }
 
   moveFigureEvent(event) {
@@ -38,18 +38,15 @@ class Game {
         cell.domCell === event.target.parentElement
     );
     if (!this.choosenFigure.canMove(cell)) return;
+    if (this.isCheckMove(this.choosenFigure, cell)) return;
     this.choosenFigure.move(cell);
-    if (this.isCheck(this.movingSide)) {
-      this.choosenFigure.backMove();
-      return;
-    }
     this.switchMovingSide();
     this.choosenFigure = null;
     this.noHighlight();
     if (this.isCheckmate(this.movingSide)) {
       document.body.innerHTML = '<h1>GAME OVER</h1>';
     }
-    this.board.DOMBoard.removeEventListener('click', this.moveFigureEvent);
+    this.board.domBoard.removeEventListener('click', this.moveFigureEvent);
   }
 
   isCheck(side) {
@@ -66,16 +63,20 @@ class Game {
     return false;
   }
 
+  isCheckMove(figure, cell) {
+    figure.testMove(cell);
+    const isCheck = this.isCheck(figure.side);
+    figure.backMove();
+    return isCheck;
+  }
+
   isCheckmate(side) {
+    if (!this.isCheck(side)) return false;
     const figures = this.board.figures.filter((figure) => figure.side === side);
     for (const figure of figures) {
       for (const cell of figure.moves) {
-        figure.move(cell);
-        if (!this.isCheck(side)) {
-          figure.backMove();
-          return false;
-        }
-        figure.backMove();
+        const isCheck = this.isCheckMove(figure, cell);
+        if (!isCheck) return false;
       }
     }
     return true;
@@ -85,12 +86,8 @@ class Game {
     for (const cell of figure.moves) {
       if (figure.canMove(cell)) {
         cell.highlight = true;
-        if (this.isCheck(figure.side)) {
-          figure.move(cell);
-          if (this.isCheck(figure.side)) {
-            cell.highlight = false;
-          }
-          figure.backMove();
+        if (this.isCheckMove(figure, cell)) {
+          cell.highlight = false;
         }
       }
     }

@@ -8,18 +8,19 @@ class Board {
     this.cells = [];
     this.height = height;
     this.width = width;
-    const DOMBoard = document.createElement('div');
-    DOMBoard.classList.add('field');
-    document.body.append(DOMBoard);
-    this.DOMBoard = DOMBoard;
+    const domBoard = document.querySelector('.field');
+    this.domBoard = domBoard;
     this.#createField();
   }
 
   #createField() {
+    this.domBoard.style.height =
+      document.documentElement.clientHeight - 100 + 'px';
+    this.domBoard.style.width = this.domBoard.style.height;
     for (let i = 1, flag = true; i <= this.height; i++) {
       const row = document.createElement('div');
       row.classList.add('row');
-      this.DOMBoard.append(row);
+      this.domBoard.append(row);
       for (let j = 1; j <= this.width; j++, flag = !flag) {
         let cell = new Cell(this, j, i, 'white');
         if (flag) {
@@ -32,10 +33,13 @@ class Board {
     }
   }
 
-  addFigure(figure, cell) {
+  addFigure(figure, coords) {
+    const cell = this.getCell(coords.x, coords.y);
+    if (!cell) return;
     this.figures.push(figure);
     cell.domCell.append(figure.domFigure);
     figure.board = this;
+    figure.cell = cell;
     cell.curFigure = figure;
   }
 
@@ -43,7 +47,6 @@ class Board {
     this.figures = this.figures.filter((piece) => piece !== figure);
     figure.board = null;
     figure.cell.curFigure = null;
-    figure.domFigure.remove();
   }
 
   getCell(x, y) {

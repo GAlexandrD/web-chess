@@ -1,18 +1,15 @@
 'use strict';
 
 class Figure {
-  constructor(board, coords, color) {
-    const cell = board.getCell(coords.x, coords.y);
+  constructor(color) {
     const domFigure = document.createElement('img');
     domFigure.classList.add('figure');
     this.side = color;
     this.domFigure = domFigure;
-    cell.curFigure = this;
-    this.cell = cell;
-    this.board = board;
+    this.cell = null;
+    this.board = null;
     this.beatedFigure = null;
     this.prevCell = null;
-    board.addFigure(this, cell);
   }
 
   backMove() {
@@ -22,40 +19,49 @@ class Figure {
     } else this.cell.curFigure = null;
     this.cell = this.prevCell;
     this.cell.curFigure = this;
-    this.cell.domCell.append(this.domFigure);
   }
 
   beat(figure) {
-    if (!this.board) return;
-    this.prevCell = this.cell;
-    this.beatedFigure = figure;
-    this.cell.curFigure = null;
-    this.cell = figure.cell;
     this.board.removeFigure(figure);
-    this.cell.domCell.append(this.domFigure);
-    this.cell.curFigure = this;
+    let beated = document.querySelector('.beatedWhite');
+    if (figure.side === 'black') {
+      beated = document.querySelector('.beatedBlack');
+    }
+    figure.domFigure.classList.add('beated');
+    beated.append(figure.domFigure);
   }
 
   move(cell) {
-    this.prevCell = this.cell;
     if (!this.canMove(cell)) return;
-    if (cell.curFigure) {
-      this.beat(cell.curFigure);
-      return;
-    }
+    if (cell.curFigure) this.beat(cell.curFigure);
     this.cell.curFigure = null;
     this.cell = cell;
     cell.domCell.append(this.domFigure);
     cell.curFigure = this;
+  }
+
+  testMove(cell) {
+    this.prevCell = this.cell;
     this.beatedFigure = null;
+    if (!this.canMove(cell)) return;
+    if (cell.curFigure) this.testBeat(cell.curFigure);
+    this.cell.curFigure = null;
+    this.cell = cell;
+    cell.curFigure = this;
+  }
+
+  testBeat(figure) {
+    this.beatedFigure = figure;
+    this.board.removeFigure(figure);
   }
 
   canMove(cell) {
-    if (!this.board) return;
+    if (!this.board) return false;
+    if (!cell) return false;
     if (!this.moves.includes(cell)) return false;
     if (!cell.curFigure) return true;
     if (cell.curFigure.side !== this.side) return true;
-    else return false;
+    return false;
   }
 }
 

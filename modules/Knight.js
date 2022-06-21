@@ -2,8 +2,8 @@
 import Figure from './Figure.js';
 
 class Knight extends Figure {
-  constructor(board, cell, color) {
-    super(board, cell, color);
+  constructor(color) {
+    super(color);
     if (color === 'white') this.domFigure.src = 'img/white/horse.png';
     if (color === 'black') this.domFigure.src = 'img/black/knight-xl.png';
   }
