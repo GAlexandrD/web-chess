@@ -6,7 +6,7 @@ class Game {
   constructor(board) {
     this.board = board;
     this.movingSide = 'white';
-    this.choosenFigure = null;
+    this.choosen = null;
     this.chooseFigureEvent = this.chooseFigureEvent.bind(this);
     this.moveFigureEvent = this.moveFigureEvent.bind(this);
   }
@@ -23,26 +23,25 @@ class Game {
 
   chooseFigureEvent(event) {
     const figure = this.board.findFigure(event.target);
-    console.log(event.target);
     if (!figure) return;
     if (figure.side !== this.movingSide) return;
-    if (this.choosenFigure) this.noHighlight();
+    if (this.choosen) this.noHighlight();
     this.highlight(figure);
-    this.choosenFigure = figure;
+    this.choosen = figure;
     this.board.domBoard.addEventListener('click', this.moveFigureEvent);
   }
 
   moveFigureEvent(event) {
     const cell = this.board.cells.find(
       (cell) =>
-        cell.domCell === event.target ||
-        cell.domCell === event.target.parentElement
+        cell.domCell === event.target.parentElement ||
+        cell.domCell === event.target
     );
-    if (!this.choosenFigure.canMove(cell)) return;
-    if (this.isCheckMove(this.choosenFigure, cell)) return;
-    this.choosenFigure.move(cell);
+    if (!this.choosen.canMove(cell)) return;
+    if (this.isCheckMove(this.choosen, cell)) return;
+    this.choosen.move(cell);
     this.switchMovingSide();
-    this.choosenFigure = null;
+    this.choosen = null;
     this.noHighlight();
     if (this.isCheckmate(this.movingSide)) {
       console.log(this.movingSide, this.movingSide === 'black');
@@ -103,7 +102,6 @@ class Game {
   }
 
   gameOver(winner) {
-    console.log(winner);
     document.body.innerHTML = '';
     const massage = document.createElement('div');
     massage.classList.add('gameover');

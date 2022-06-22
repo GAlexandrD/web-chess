@@ -5,7 +5,6 @@ import Knight from './Knight.js';
 import Rook from './Rook.js';
 import Bishop from './Bishop.js';
 import Queen from './Queen.js';
-import Cell from './Cell.js';
 
 class Pawn extends Figure {
   constructor(color) {
