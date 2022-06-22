@@ -11,6 +11,8 @@
   flex-shrink: 0;
   flex-direction: column-reverse;
   border: 20px solid #946c3e;
+  padding: 4px;
+  box-shadow: inset 4px 4px #8a5f2e, inset -4px -4px #8a5f2e;
 }
 
 .chooseFigure {
@@ -23,12 +25,14 @@
   align-items: center;
   border: #946c3e 10px solid;
   background: #ebc99d;
+  padding: 4px;
+  box-shadow: inset 4px 4px #8a5f2e, inset -4px -4px #8a5f2e;
 }
 
 .choice {
-  width: 100px;
-  height: 100px;
-  padding: 30px;
+  width: 70px;
+  height: 70px;
+  padding: 15px;
 }
 
 .row {
@@ -86,7 +90,6 @@
   flex-basis: 100%;
   flex-direction: row-reverse;
   flex-wrap: wrap;
-  background-color: #946c3e;
   margin: 0 40px 100px 20px;
 }
 
@@ -94,6 +97,14 @@
   display: flex;
   flex-basis: 100%;
   flex-wrap: wrap;
-  background-color: #946c3e;
+  background-color: black;
   margin: 0 20px 100px 40px;
+}
+
+.gameover {
+  display: block;
+  text-align: center;
+  font-size: 50px;
+  margin: 300px auto;
+  color: chocolate;
 }

@@ -23,6 +23,7 @@ class Game {
 
   chooseFigureEvent(event) {
     const figure = this.board.findFigure(event.target);
+    console.log(event.target);
     if (!figure) return;
     if (figure.side !== this.movingSide) return;
     if (this.choosenFigure) this.noHighlight();
@@ -44,7 +45,9 @@ class Game {
     this.choosenFigure = null;
     this.noHighlight();
     if (this.isCheckmate(this.movingSide)) {
-      document.body.innerHTML = '<h1>GAME OVER</h1>';
+      console.log(this.movingSide, this.movingSide === 'black');
+      if (this.movingSide === 'black') this.gameOver('white');
+      else this.gameOver('black');
     }
     this.board.domBoard.removeEventListener('click', this.moveFigureEvent);
   }
@@ -97,6 +100,15 @@ class Game {
     for (const cell of this.board.cells) {
       cell.highlight = false;
     }
+  }
+
+  gameOver(winner) {
+    console.log(winner);
+    document.body.innerHTML = '';
+    const massage = document.createElement('div');
+    massage.classList.add('gameover');
+    massage.innerHTML = `Game over, ${winner} side won!`;
+    document.body.append(massage);
   }
 }
 
