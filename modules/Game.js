@@ -1,6 +1,6 @@
 'use strict';
 
-import King from './King.js';
+import King from './figures/King.js';
 
 class Game {
   constructor(board) {

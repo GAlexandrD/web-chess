@@ -2,12 +2,12 @@
 
 import Game from './modules/Game.js';
 import Board from './modules/Board.js';
-import King from './modules/King.js';
-import Knight from './modules/Knight.js';
-import Queen from './modules/Queen.js';
-import Bishop from './modules/Bishop.js';
-import Rook from './modules/Rook.js';
-import Pawn from './modules/Pawn.js';
+import King from './modules/figures/King.js';
+import Knight from './modules/figures/Knight.js';
+import Queen from './modules/figures/Queen.js';
+import Bishop from './modules/figures/Bishop.js';
+import Rook from './modules/figures/Rook.js';
+import Pawn from './modules/figures/Pawn.js';
 
 const startChess = () => {
   const board = new Board(8, 8);
