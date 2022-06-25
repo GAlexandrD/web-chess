@@ -12,13 +12,13 @@ class Figure {
     this.prevCell = null;
   }
 
-  backMove() {
-    if (!this.prevCell) return;
-    if (this.beatedFigure) {
-      this.board.addFigure(this.beatedFigure, this.cell);
-    } else this.cell.curFigure = null;
-    this.cell = this.prevCell;
-    this.cell.curFigure = this;
+  move(cell) {
+    if (!this.canMove(cell)) return;
+    if (cell.curFigure) this.beat(cell.curFigure);
+    this.cell.curFigure = null;
+    this.cell = cell;
+    cell.domCell.append(this.domFigure);
+    cell.curFigure = this;
   }
 
   beat(figure) {
@@ -29,15 +29,6 @@ class Figure {
     }
     figure.domFigure.classList.add('beated');
     beated.append(figure.domFigure);
-  }
-
-  move(cell) {
-    if (!this.canMove(cell)) return;
-    if (cell.curFigure) this.beat(cell.curFigure);
-    this.cell.curFigure = null;
-    this.cell = cell;
-    cell.domCell.append(this.domFigure);
-    cell.curFigure = this;
   }
 
   testMove(cell) {
@@ -53,6 +44,15 @@ class Figure {
   testBeat(figure) {
     this.beatedFigure = figure;
     this.board.removeFigure(figure);
+  }
+
+  backMove() {
+    if (!this.prevCell) return;
+    if (this.beatedFigure) {
+      this.board.addFigure(this.beatedFigure, this.cell);
+    } else this.cell.curFigure = null;
+    this.cell = this.prevCell;
+    this.cell.curFigure = this;
   }
 
   canMove(cell) {

@@ -44,7 +44,6 @@ class Game {
     this.choosen = null;
     this.noHighlight();
     if (this.isCheckmate(this.movingSide)) {
-      console.log(this.movingSide, this.movingSide === 'black');
       if (this.movingSide === 'black') this.gameOver('white');
       else this.gameOver('black');
     }
@@ -55,9 +54,10 @@ class Game {
     const king = this.board.figures.find(
       (figure) => figure instanceof King && figure.side === side
     );
-    const figures = this.board.figures.filter((figure) => figure.side !== side);
+    const figures = this.board.figures;
+    const enemies = figures.filter((figure) => figure.side !== side);
     const kingCell = king.cell;
-    for (const figure of figures) {
+    for (const figure of enemies) {
       if (figure.canMove(kingCell)) {
         return true;
       }
@@ -74,8 +74,9 @@ class Game {
 
   isCheckmate(side) {
     if (!this.isCheck(side)) return false;
-    const figures = this.board.figures.filter((figure) => figure.side === side);
-    for (const figure of figures) {
+    const figures = this.board.figures;
+    const allies = figures.filter((figure) => figure.side === side);
+    for (const figure of allies) {
       for (const cell of figure.moves) {
         const isCheck = this.isCheckMove(figure, cell);
         if (!isCheck) return false;
