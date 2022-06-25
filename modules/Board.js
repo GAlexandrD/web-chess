@@ -14,18 +14,13 @@ class Board {
   }
 
   #createField() {
-    this.domBoard.style.height =
-      document.documentElement.clientHeight - 100 + 'px';
-    this.domBoard.style.width = this.domBoard.style.height;
     for (let i = 1, flag = true; i <= this.height; i++) {
       const row = document.createElement('div');
       row.classList.add('row');
       this.domBoard.append(row);
       for (let j = 1; j <= this.width; j++, flag = !flag) {
         let cell = new Cell(this, j, i, 'white');
-        if (flag) {
-          cell = new Cell(this, j, i, 'black');
-        }
+        if (flag) cell = new Cell(this, j, i, 'black');
         this.cells.push(cell);
         row.append(cell.domCell);
       }

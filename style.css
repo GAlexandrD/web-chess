@@ -11,6 +11,8 @@
   flex-shrink: 0;
   flex-direction: column-reverse;
   border: 20px solid #946c3e;
+  height: 600px;
+  width: 600px;
   padding: 4px;
   box-shadow: inset 4px 4px #8a5f2e, inset -4px -4px #8a5f2e;
 }
