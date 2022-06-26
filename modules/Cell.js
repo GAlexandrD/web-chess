@@ -1,14 +1,13 @@
 'use strict';
 
 class Cell {
-  constructor(board, x, y, color) {
+  constructor(x, y, color) {
     const domCell = document.createElement('div');
     domCell.classList.add(color, 'cell');
     this.x = x;
     this.y = y;
     this.curFigure = null;
     this.domCell = domCell;
-    this.board = board;
   }
 
   set highlight(value) {

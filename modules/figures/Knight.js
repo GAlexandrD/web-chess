@@ -23,12 +23,9 @@ class Knight extends Figure {
       { x: x - 2, y: y - 1 },
     ];
     for (const move of potentialMoves) {
-      const cell = this.board.getCell(move.x, move.y);
-      if (!cell) continue;
-      moves.push(cell);
+      moves.push(this.board.getCell(move.x, move.y));
     }
-    console.log(moves);
-    return moves;
+    return moves.filter((cell) => cell);
   }
 }
 

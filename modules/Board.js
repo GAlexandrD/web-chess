@@ -19,8 +19,8 @@ class Board {
       row.classList.add('row');
       this.domBoard.append(row);
       for (let j = 1; j <= this.width; j++, flag = !flag) {
-        let cell = new Cell(this, j, i, 'white');
-        if (flag) cell = new Cell(this, j, i, 'black');
+        let cell = new Cell(j, i, 'white');
+        if (flag) cell = new Cell(j, i, 'black');
         this.cells.push(cell);
         row.append(cell.domCell);
       }
