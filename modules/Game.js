@@ -87,11 +87,10 @@ class Game {
 
   highlight(figure) {
     for (const cell of figure.moves) {
-      if (figure.canMove(cell)) {
+      const canMove = figure.canMove(cell);
+      const isCheckMove = this.isCheckMove(figure, cell);
+      if (canMove && !isCheckMove) {
         cell.highlight = true;
-        if (this.isCheckMove(figure, cell)) {
-          cell.highlight = false;
-        }
       }
     }
   }

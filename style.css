@@ -21,20 +21,24 @@
   display: none;
   position: absolute;
   left: calc(50% - 200px);
-  top: calc(50% - 50px);
+  top: 30%;
   z-index: 100;
   justify-content: space-between;
   align-items: center;
-  border: #946c3e 10px solid;
+  border: #9d6d36 10px solid;
   background: #ebc99d;
   padding: 4px;
-  box-shadow: inset 4px 4px #8a5f2e, inset -4px -4px #8a5f2e;
+  box-shadow: inset 5px 5px #8a5f2e, inset -4px -5px #8a5f2e;
 }
 
 .choice {
   width: 70px;
   height: 70px;
   padding: 15px;
+}
+
+.choice:hover {
+  background-color: #8a5f2e;
 }
 
 .row {

@@ -56,8 +56,7 @@ class Figure {
   }
 
   canMove(cell) {
-    if (!this.board) return false;
-    if (!cell) return false;
+    if (!this.board || !cell) return false;
     if (!this.moves.includes(cell)) return false;
     if (!cell.curFigure) return true;
     if (cell.curFigure.side !== this.side) return true;

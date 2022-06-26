@@ -8,14 +8,12 @@ class Cell {
     this.y = y;
     this.curFigure = null;
     this.domCell = domCell;
+    this.board = board;
   }
 
   set highlight(value) {
-    if (value) {
-      this.domCell.classList.add('highlight');
-    } else {
-      this.domCell.classList.remove('highlight');
-    }
+    if (value) this.domCell.classList.add('highlight');
+    else this.domCell.classList.remove('highlight');
   }
 }
 
