@@ -62,21 +62,24 @@ class Pawn extends Figure {
     const x = this.cell.x;
     const y = this.cell.y;
     const moves = [];
-    if (this.side === 'white') {
-      moves.push(
-        this.board.getCell(x, y + 1),
-        this.board.getCell(x + 1, y + 1),
-        this.board.getCell(x - 1, y + 1)
-      );
-      if (this.firstStep) moves.push(this.board.getCell(x, y + 2));
+    const cells = {
+      white: [
+        { x: x + 1, y: y + 1 },
+        { x: x - 1, y: y + 1 },
+        { x: x, y: y + 1 },
+      ],
+      black: [
+        { x: x + 1, y: y - 1 },
+        { x: x - 1, y: y - 1 },
+        { x: x, y: y - 1 },
+      ],
+    };
+    for (const cell of cells[this.side]) {
+      moves.push(this.board.getCell(cell.x, cell.y));
     }
-    if (this.side === 'black') {
-      moves.push(
-        this.board.getCell(x, y - 1),
-        this.board.getCell(x + 1, y - 1),
-        this.board.getCell(x - 1, y - 1)
-      );
-      if (this.firstStep) moves.push(this.board.getCell(x, y - 2));
+    if (this.firstStep) {
+      if (this.side === 'white') moves.push(this.board.getCell(x, y + 2));
+      else moves.push(this.board.getCell(x, y - 2));
     }
     return moves.filter((cell) => cell);
   }
