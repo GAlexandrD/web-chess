@@ -32,11 +32,7 @@ class Game {
   }
 
   moveFigureEvent(event) {
-    const cell = this.board.cells.find(
-      (cell) =>
-        cell.domCell === event.target.parentElement ||
-        cell.domCell === event.target
-    );
+    const cell = this.board.findCell(event.target);
     if (!this.choosen.canMove(cell)) return;
     if (this.isCheckMove(this.choosen, cell)) return;
     this.choosen.move(cell);

@@ -48,6 +48,12 @@ class Board {
     return this.cells.find((cell) => cell.x === x && cell.y === y);
   }
 
+  findCell(domEl) {
+    return this.cells.find(
+      (cell) => cell.domCell === domEl || cell.domCell === domEl.parentElement
+    );
+  }
+
   findFigure(domEl) {
     return this.figures.find((figure) => figure.domFigure === domEl);
   }
